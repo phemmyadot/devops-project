@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  devopsdb:
+    build: 
+      context: ./Docker-files/devopsdb
+    image: phemmyadot/fmadb
+    container_name: devopsdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - devopsdbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=devopspass
+
+  devopscache01:
+    image: memecached
+    ports:
+      - "11211:11211"
+
+  devopsmq01:
+    image: rabbitmq
+    ports:
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  devopsapp:
+    build: 
+      context: ./Docker-files/devopsapp
+    image: phemmyadot/fmaapp
+    container_name: devopsapp
+    ports:
+      - "8080:8080"
+    volumes:
+      - devopsappdata:/usr/local/tomcat/webapps
+
+
+  devopsweb:
+    build: 
+      context: ./Docker-files/devopsweb
+    image: phemmyadot/fmaweb
+    container_name: devopsweb
+    ports:
+      - "80:80"
+
+volumes:
+  devopsdbdata: {}
+  devopsappdata: {}
