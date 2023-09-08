@@ -13,7 +13,7 @@ services:
       - MYSQL_ROOT_PASSWORD=devopspass
 
   devopscache01:
-    image: memecached
+    image: memcached
     ports:
       - "11211:11211"
 
