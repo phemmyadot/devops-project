@@ -2,7 +2,7 @@ version: '3.8'
 services:
   devopsdb:
     build: 
-      context: ./Docker-files/devopsdb
+      context: ./Docker-files/db
     image: phemmyadot/fmadb
     container_name: devopsdb
     ports:
@@ -27,7 +27,7 @@ services:
 
   devopsapp:
     build: 
-      context: ./Docker-files/devopsapp
+      context: ./Docker-files/app
     image: phemmyadot/fmaapp
     container_name: devopsapp
     ports:
@@ -38,7 +38,7 @@ services:
 
   devopsweb:
     build: 
-      context: ./Docker-files/devopsweb
+      context: ./Docker-files/web
     image: phemmyadot/fmaweb
     container_name: devopsweb
     ports:
